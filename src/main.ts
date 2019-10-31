@@ -31,17 +31,6 @@ async function bootstrap() {
 		.build();
 
 	const document = SwaggerModule.createDocument(app, options);
-	/*
-		const stt = require('swagger-test-templates');
-		const testsConfig = {
-			assertionFormat: 'should',
-			testModule: 'request'
-		};
-		const tests = stt.testGen(document, testsConfig);
-		tests.forEach(test => {
-			fs.writeFileSync(path.resolve(__dirname, '..', 'tests', test.name), test.test);
-		});
-	*/
 	SwaggerModule.setup('/swagger', app, document);
 
 	await app.listen(process.env.PORT && !isNaN(+process.env.PORT) ? +process.env.PORT : 3000);

@@ -64,7 +64,6 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "sqlite3": "^4.1.0",
-    "swagger-test-templates": "^1.6.0",
     "swagger-ui-express": "^4.1.2",
     "ts-node": "^8.4.1",
     "tweetnacl-util": "^0.15.0",
@@ -75,5 +74,8 @@
   "devDependencies": {
     "@nestjs/cli": "^6.11.2",
     "nodemon": "^1.19.4"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.1.1"
   }
 }
