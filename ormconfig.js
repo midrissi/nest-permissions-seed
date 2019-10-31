@@ -1,6 +1,5 @@
 const ConnectionString = require('connection-string').ConnectionString;
 const config = require('dotenv').config;
-const path = require('path');
 
 config();
 
@@ -9,15 +8,15 @@ const connectionString = new ConnectionString(process.env.DATABASE_URL);
 if (connectionString.protocol === 'sqlite') {
     module.exports = {
         type: 'sqlite',
-        database: './' + connectionString.host + (connectionString.segments.length ? '/' + connectionString.segments[0] : ''),
+        database: './' + connectionString.hostname + (connectionString.path.length ? '/' + connectionString.path[0] : ''),
         entities: [
-            'src/**/entities/**/*.entity.ts',
+            'dist/**/entities/**/*.entity.js',
         ],
         migrations: [
-            'src/**/migrations/**/*.ts'
+            'dist/**/migrations/**/*.js'
         ],
         subscribers: [
-            'src/**/subscribers/**/*.ts'
+            'dist/**/subscribers/**/*.js'
         ],
         logging: 'all',
         synchronize: false,
@@ -25,19 +24,19 @@ if (connectionString.protocol === 'sqlite') {
 } else {
     module.exports = {
         type: connectionString.protocol,
-        host: connectionString.host,
+        host: connectionString.hostname,
         port: +connectionString.port,
         username: connectionString.user,
         password: connectionString.password,
-        database: connectionString.segments[0],
+        database: connectionString.path[0],
         entities: [
-            'src/**/entities/**/*.entity.ts',
+            'dist/**/entities/**/*.entity.js',
         ],
         migrations: [
-            'src/**/migrations/**/*.ts'
+            'dist/**/migrations/**/*.js'
         ],
         subscribers: [
-            'src/**/subscribers/**/*.ts'
+            'dist/**/subscribers/**/*.js'
         ],
         logging: 'all',
         synchronize: false,

@@ -12,7 +12,7 @@ import { entities } from './entities/index';
   controllers: [
     ...controllers
   ],
-  components: [
+  providers: [
     ...services
   ],
 })

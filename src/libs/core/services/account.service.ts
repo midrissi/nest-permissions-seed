@@ -1,4 +1,4 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass, plainToClassFromExist } from 'class-transformer';
 import { Repository } from 'typeorm';
@@ -11,7 +11,7 @@ import { User } from '../entities/user.entity';
 import { TokenService } from './token.service';
 import { InAccountDto } from '../dto/in-account.dto';
 
-@Component()
+@Injectable()
 export class AccountService {
     constructor(
         @InjectRepository(User)

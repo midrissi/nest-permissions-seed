@@ -1,11 +1,11 @@
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
 
 import { Group } from '../entities/group.entity';
 
-@Component()
+@Injectable()
 export class GroupsService {
     groups: Group[] = null;
     constructor(

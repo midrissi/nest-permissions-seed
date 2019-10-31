@@ -1,7 +1,7 @@
 import { decode, sign, verify } from 'jsonwebtoken';
-import { Component } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-@Component()
+@Injectable()
 export class TokenService {
     sign(user: any) {
         return sign(

@@ -1,12 +1,12 @@
 import { HttpException } from '@nestjs/common';
 import {
     PipeTransform,
-    Pipe,
+    Injectable,
     ArgumentMetadata,
     HttpStatus,
 } from '@nestjs/common';
 
-@Pipe()
+@Injectable()
 export class ParseIntWithDefaultPipe implements PipeTransform<string> {
     constructor(private readonly defaultValue: number) {
 

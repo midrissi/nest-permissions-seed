@@ -1,12 +1,12 @@
-import { ExceptionFilter, Catch, HttpStatus } from '@nestjs/common';
-import { HttpException } from '@nestjs/core';
+import { ExceptionFilter, Catch, HttpStatus, ExecutionContext } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 import { JsonWebTokenError } from 'jsonwebtoken';
 import { CustomValidationError } from './custom-validation.error';
 
 @Catch(SyntaxError, CustomValidationError, JsonWebTokenError, Error)
 export class CustomExceptionFilter implements ExceptionFilter {
-    catch(exception: CustomValidationError | JsonWebTokenError, response) {
+    catch(exception: CustomValidationError | JsonWebTokenError, context: ExecutionContext) {
+        const [, response] = context.getArgs()
         const errors = {};
         if (exception instanceof CustomValidationError) {
             exception.errors.forEach((error: ValidationError) => {

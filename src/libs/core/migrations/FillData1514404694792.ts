@@ -129,12 +129,13 @@ export class FillData1514404694792 implements MigrationInterface {
             )
         );
         const tempUser = new User();
+        const passwd = await tempUser.makePassword('12345678');
         const uUsers = await queryRunner.manager.getRepository<User>(User).save(
             plainToClass(User,
                 [{
                     username: 'admin',
                     email: 'admin@admin.com',
-                    password: tempUser.makePassword('12345678'),
+                    password: passwd,
                     firstName: 'AdminFirstName',
                     lastName: 'AdminLastName',
                     isSuperuser: false,
@@ -145,7 +146,7 @@ export class FillData1514404694792 implements MigrationInterface {
                 {
                     username: 'user1',
                     email: 'user1@user1.com',
-                    password: tempUser.makePassword('12345678'),
+                    password: passwd,
                     firstName: 'User1FirstName',
                     lastName: 'User1LastName',
                     isSuperuser: false,
@@ -156,7 +157,7 @@ export class FillData1514404694792 implements MigrationInterface {
                 {
                     username: 'user2',
                     email: 'user2@user2.com',
-                    password: tempUser.makePassword('12345678'),
+                    password: passwd,
                     firstName: 'User2FirstName',
                     lastName: 'User2LastName',
                     isSuperuser: false,

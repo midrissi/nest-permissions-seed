@@ -1,13 +1,12 @@
-import { CanActivate, ExecutionContext, Guard } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { plainToClass } from 'class-transformer';
-import { IncomingMessage } from 'http';
 
 import { User } from '../entities/user.entity';
 import { GroupsService } from '../services/groups.service';
 import { TokenService } from '../services/token.service';
 
-@Guard()
+@Injectable()
 export class AccessGuard implements CanActivate {
     constructor(
         private readonly reflector: Reflector,
@@ -18,8 +17,9 @@ export class AccessGuard implements CanActivate {
         this.groupsService.loadAll();
     }
 
-    canActivate(req: IncomingMessage, context: ExecutionContext): boolean {
-        const { parent, handler } = context;
+    canActivate(context: ExecutionContext): boolean {
+        const req = context.switchToHttp().getRequest();
+        const handler = context.getHandler();
         const authorizationHeader = req.headers['authorization'] ?
             String(req.headers['authorization']) : null;
         if (authorizationHeader && authorizationHeader.indexOf(process.env.JWT_AUTH_HEADER_PREFIX) === 0) {
